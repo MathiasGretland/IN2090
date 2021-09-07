@@ -1,0 +1,30 @@
+Oppgave 1
+
+a) Hva er begrepene relasjonsnavn, attributt og tuppel i relasjonene over?
+
+Vil tro at relasjonsnavn, er navnet på hva relasjonen (tabellen), så i denne oppgaven har vi relasjonene
+Student og Gruppelærer, og dette er da relasjonsnavnene
+
+Attributt er da alle kolonnene nedover inkludert det som sier hva kolonnen handler om, altså vil kolonnen (Adresse)
+som inkluderer (Adresse, Veigaten 2, Veigaten 2, Stedgaten 1, Husveien 32) være en Attributt
+
+Tuppel vil da være alle radene bortover, så i relasjonen student så vil 
+(Ola, 1997-01-01, 1234, Sognsveien 1, Informatikk) være det vi kaller et Tuppel
+
+b) Finn alle supernøkler og kandidatnøkler for relasjonene over.
+
+Supernøkler i Student: {Fødselsdato, StudentNr, Adresse}, {StudentNr, Studie}, {Navn, Fødselsdato, StudentNr, Adresse}
+Supernøkler i Gruppelærer: {StudentNr, Kurs, Semester}
+
+Kandidatnøkler i Student:
+Kandidatnøkler i Gruppelærer:
+
+c)
+Den finner Fødselsdato til alle med navn "Sara" i Student
+
+d)
+1. π Navn(σ Adresse = ′Sognsveien 1′(Student))
+
+2. π StudentNr(σ  (Gruppelærer))
+
+
