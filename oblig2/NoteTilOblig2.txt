@@ -1,0 +1,5 @@
+ssh mathige@login.ifi.uio.no
+
+cd IN2090
+
+psql -h dbpg-ifi-kurs01 -U mathige
