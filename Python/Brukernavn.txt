@@ -1,0 +1,6 @@
+Brukernavn: mathige_priv
+Passord: aib0rooCh0
+
+ssh mathige@login.ifi.uio.no
+
+psql -h dbpg-ifi-kurs01 -d mathige -U mathige_priv
