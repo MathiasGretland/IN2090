@@ -7,10 +7,11 @@ pwd = "aib0rooCh0" # Set inn the password for the _priv-user you got in a mail
 
 # Gather all connection info into one string
 connection = \
+    "host='dbpg-ifi-kurs01.uio.no' " + \
     "dbname='" + dbname + "' " + \
     "user='" + user + "' " + \
-    "port='5432' " + \
-    "password='" + pwd + "'"
+    "password='" + pwd + "' " + \
+    "port='5432'" 
 
     #"host='dbpg-ifi-kurs01.uio.no' " + \
 
@@ -34,7 +35,7 @@ def frontend():
     search(conn, username)
 
 def register(conn):
-    
+
     print(" -- REGISTER NEW USER --")
     # Get credentials for new user account
     username = input("Username: ")
@@ -51,7 +52,7 @@ def register(conn):
                 (name, username, password, address))
     conn.commit()
     print("New user " + username + " added!")
-                  
+
 
 def login(conn):
     print(" -- LOGIN --")
