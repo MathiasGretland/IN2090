@@ -243,7 +243,65 @@ FROM film
 WHERE filmid IN (SELECT * FROM ingmarbergmanmovies)
 ORDER BY prodyear ASC;
 
-
 #24
+SELECT f.title, f.prodyear
+FROM film AS f
+    JOIN filmparticipation AS fp USING (filmid)
+    JOIN person AS p USING (personid)
+WHERE p.firstname = 'Angelina' AND p.lastname = 'Jolie'
+    AND fp.filmid IN (
+        SELECT fp2.filmid
+        FROM filmparticipation AS fp2 JOIN person AS p USING (personid)
+        WHERE p.firstname = 'Antonio' AND p.lastname = 'Banderas'
+    );
 
 #25
+SELECT f.title, p.lastname || ', ' || p.firstname AS navn, fp.parttype
+FROM film as f
+    JOIN filmparticipation AS fp USING (filmid)
+    JOIN person AS p USING (personid)
+    JOIN (
+        SELECT fp.personid, fp.filmid
+        FROM filmparticipation AS fp
+            JOIN film AS f USING (filmid)
+            JOIN filmitem AS fi USING (filmid)
+         WHERE f.prodyear = 2003 AND fi.filmtype = 'C'
+         GROUP BY fp.personid, fp.filmid
+         HAVING count(parttype) > 1
+    ) AS q ON q.filmid = fp.filmid AND q.personid = fp.personid
+    ORDER BY navn ASC;
+
+#26
+SELECT p.lastname || ', ' || p.firstname AS navn, count(DISTINCT f.filmid) AS ant_filmer --Viktig å bruke DISTINCT slik at den ikke tar med filmid duplikater
+FROM film AS f
+    JOIN filmparticipation AS fp USING (filmid)
+    JOIN person AS p USING (personid)
+WHERE f.prodyear IN (2008,2009,2010) AND fp.personid NOT IN (
+    SELECT personid
+    FROM filmparticipation AS fp JOIN film AS f USING (filmid)
+    WHERE f.prodyear = 2005
+)
+GROUP BY p.lastname, p.firstname
+HAVING count(DISTINCT f.filmid) > 15;
+
+#27
+SELECT p.lastname || ', ' || p.firstname AS regissor, f.title
+FROM film AS f
+    JOIN filmparticipation AS fp USING (filmid)
+    JOIN person AS p USING (personid)
+WHERE fp.parttype = 'director'
+    AND
+        f.filmid IN (
+            SELECT f.filmid
+            FROM film AS f JOIN filmparticipation AS fp USING (filmid)
+            GROUP BY f.filmid
+            HAVING count(fp.personid) > 200
+        )
+    AND
+        f.filmid NOT IN (
+    SELECT f.filmid
+    FROM film as f JOIN filmparticipation AS fp USING (filmid)
+    WHERE fp.parttype = 'director'
+    GROUP BY f.filmid
+    HAVING count(fp.parttype) > 1
+);

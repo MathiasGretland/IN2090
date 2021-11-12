@@ -31,5 +31,26 @@ GROUP BY f.title, f.prodyear
 HAVING f.prodyear > 2007;
 
 #c)
+SELECT title
+FROM film
+WHERE prodyear > 2007
+    AND filmid IN (
+        (SELECT filmid
+        FROM filmgenre
+        WHERE genre = 'Western')
+        EXCEPT
+        (SELECT filmid
+        FROM filmrating)
+    );
 
-#d) U FAILED
+#d) THIS IS WHAT WE CALL AN EPIC VICTORY ROYALE TEAM
+SELECT f.title
+FROM film AS f
+    JOIN filmgenre AS fg USING (filmid)
+WHERE f.prodyear > 2007
+    AND fg.genre = 'Western'
+    AND NOT EXISTS (
+        SELECT *
+        FROM filmrating AS fr
+        WHERE f.filmid = fr.filmid
+    );

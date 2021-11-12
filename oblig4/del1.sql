@@ -22,19 +22,25 @@ GROUP BY f.title, fp.parttype;
 
 -- Oppgave 4
 (SELECT title, prodyear
-  FROM film JOIN filmgenre USING (filmid)
-  WHERE genre = 'Film-Noir')
+    FROM film JOIN filmgenre USING (filmid)
+    WHERE genre = 'Film-Noir')
 INTERSECT
 (SELECT title, prodyear
-  FROM film JOIN filmgenre USING (filmid)
-  WHERE genre = 'Comedy');
+    FROM film JOIN filmgenre USING (filmid)
+    WHERE genre = 'Comedy');
 
--- Oppgave 5 ?????????????? YO WTF
-SELECT maintitle
-FROM series;
-
-HAVING votes > 1000;
-
+-- Oppgave 5
+WITH
+  hoyest AS (
+    SELECT MAX(rank)
+    FROM filmrating
+    WHERE votes > 1000
+  )
+SELECT s.maintitle
+FROM series AS s
+    JOIN filmrating AS f ON (s.seriesid = f.filmid)
+WHERE f.votes > 1000 AND f.rank IN (SELECT * FROM hoyest)
+GROUP BY s.maintitle;
 
 -- Oppgave 6
 WITH
@@ -52,7 +58,7 @@ GROUP BY f.title;
 
 -- Oppgave 7
 SELECT p.lastname || ', ' || p.firstname AS skuespiller, count(filmid) AS antall_filmer
-FROM (SELECT DISTINCT filmcharacter FROM filmcharacter GROUP BY filmcharacter HAVING count(filmcharacter) = 1) AS unik -- Finner unike 
+FROM (SELECT DISTINCT filmcharacter FROM filmcharacter GROUP BY filmcharacter HAVING count(filmcharacter) = 1) AS unik -- Finner unike
   JOIN filmcharacter AS fc USING (filmcharacter) --Må da bruke JOIN på filmcharacter for å få med partid
   JOIN filmparticipation AS fp USING (partid)
   JOIN person AS p USING (personid)
