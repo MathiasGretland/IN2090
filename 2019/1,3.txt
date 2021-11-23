@@ -1,0 +1,25 @@
+Starter med å realisere de vanlige entitetene:
+
+Book(web_adress, ISBN, Title, id, email)
+Author(Id, phone_number, first_name, last_name, email, ISBN)
+Publisher(pid) -- ser vekk fra office for nå
+Office(office, pid)
+
+Chapter(Chapter_number, title, ISBN)
+
+
+
+Kandidatnøkler:
+Book(web_adress), Book(ISBN) (Velger Book(ISBN) som primær)
+Author(id) (primær)
+Publisher(pid) (primær)
+Office(office, pid) (primær)
+Chapter(Chapter_number, title, ISBN)
+
+Fremmednøkler:
+
+Office(pid) -> Publisher(pid)
+
+Chapter(Book) -> Book(ISBN)
+Book(id) -> Author(ISBN)
+Author(ISBN) -> Book(id)
