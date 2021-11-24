@@ -1,7 +1,7 @@
-Starter med å realisere de vanlige entitetene:
+Starter med å realisere de vanlige entitetene: #IKKE FERDIG!
 
-Book(web_adress, ISBN, Title, id, email)
-Author(Id, phone_number, first_name, last_name, email, ISBN)
+Book(web_adress, ISBN, Title)
+Author(Id, phone_number, first_name, last_name)
 Publisher(pid) -- ser vekk fra office for nå
 Office(office, pid)
 
