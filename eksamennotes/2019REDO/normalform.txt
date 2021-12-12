@@ -1,0 +1,180 @@
+3.1
+R(A,B,C,D,E,F,G)
+
+A -> C
+C -> B, D
+A,B -> D, F
+B,E -> G
+
+Hvilke attributter er med i tillukningen til A? NOTE! Altså hvilke andre attributter får vi med å ha tilgang til A?
+
+{A}+ = {A, B, C, D, F}
+
+
+Hvilke attributter er med i tillukningen til B?
+
+{B}+ = {B}
+
+Hvilke attributter må være med i alle Kandidatnøkler?
+
+A og E, fordi de forekommer alltid på venstre side: {A, E}
+
+
+3.2
+R(A,B,C,D,E,F,G)
+Hvor {A, B} er Kandidatnøkler
+
+A -> C      1NF
+B -> D      1NF
+A, B -> F   BCNF
+A, D -> E   2NF
+
+Husk at siden en av fdene er på 1NF, så betyr det at relasjonen er på 1NF.
+
+
+
+UKESOPPGAVENE FOR FDER OG TILLUKNING UKE 7:
+a)
+1. StudentNr -> land
+2. land -> populasjon
+
+
+b)
+personnr → navn
+personnr → fødselsdato
+kurskode → kursnavn, fagkode, fagnummer
+fagkode, fagnummer → kurskode
+
+1. {personnr}+ = {personnr, navn, fødselsdato}
+2. {personnr, fagkode, fagnummer}+ = {personnr, fagkode, fagnummer, navn, fødselsdato, kurskode, kursnavn}
+
+
+Oppgave 2
+
+isbn → tittel, forfatter, forlagsnr, sjanger
+forlagsnr → forlagsnavn
+utgitt, forfatter, forlagsnr → isbn
+sjanger → aldersgrense
+
+1. {forlagsnr}+ = {forlagsnr, forlagsnavn}
+2. {forlagsnr, sjanger, forfatter}+ = {forlagsnr, sjanger, forfatter, forlagsnavn, aldersgrense}
+3. Hva er Kandidatnøklene til Bok?
+
+{utgitt}+ = {utgitt}
+{utgitt, isbn}+ = {utgitt, isbn, tittel, forfatter, forlagsnr, sjanger, forlagsnavn, aldersgrense}. Så denne må være
+{utgitt, forlagsnr}+ = {utgitt, forlagsnr, forlagsnavn}
+{utgitt, forlagsnr, forfatter}+ = {utgitt, forlagsnr, forfatter, isbn, tittel, sjanger, forlagsnavn, aldersgrense}. Så denne må være
+{utgitt, sjanger}+ = {utgitt, sjanger, aldersgrense}
+
+
+Kandidatnøkler:
+{utgitt, isbn}, {utgitt, forlagsnr, forfatter}
+
+
+
+fasit:
+Aldri på høyresider: utgitt
+Kun er på høyresider: tittel, forlagsnavn, aldersgrense
+Må forsøke å utvide med: isbn, forlagsnr, forfatter, sjanger
+Forsøker først med kun utgitt: utgitt⁺ = {utgitt}, alstå ikke kandidatnøkkel.
+Utvider med isbn: {isbn, utgitt}⁺ = {isbn, utgitt, tittel, forfatter, forlagsnr, sjanger, forlsagsnavn, aldersgrense}, altså kandidatnøkkel
+Utvider med forlagsnr: {utgitt, forlagsnr}⁺ = {utgitt, forlagsnr, forlagsnavn}, altså ikke kandidatnøkkel
+Utvider med forfatter: {utgitt, forfatter}⁺ = {utgitt, forfatter}, altså ikke kandidatnøkkel
+Utvider med sjanger: {utgitt, sjanger}⁺ = {utgitt, sjanger, aldersgrense}, altså ikke kandidatnøkkel
+Utvider med forlagsnr og forfatter: {utgitt, forlagsnr, forfatter}⁺ = {utgitt, forlagsnr, forfatter, forlagsnavn, isbn, tittel, sjanger, aldersgrense}, altså en kandidatnøkkel
+Utvider med forlagsnr og sjanger: {utgitt, forlagsnr, sjanger}⁺ = {utgitt, forlagsnr, sjanger, forlagsnavn, aldersgrense}, altså ikke kandidatnøkkel
+Utvider med forfatter og sjanger: {utgitt, forfatter, sjanger}⁺ = {utgitt, forfatter, sjanger, aldersgrense}, altså ikke kandidatnøkkel
+Alle større utvidelser vil kun gi supernøkler som ikke er minimale. Altså har vi følgende to kandiadtnøkler: {utgitt, isbn} og {utgitt, forlagsnr, forfatter}.
+
+
+
+2019 PRØVEEKSAMEN
+Oppgave 10
+
+Gitt følgende relasjon:
+P(A, B, C, D, E, F, G)
+
+Og følgende FDer:
+C -> A, E
+A, B -> D
+B -> C
+G -> B
+
+Hvilke Kandidatnøkler har P? Vis hvordan du kommer frem til svaret.
+
+Hvilke attributter finnes kun på venstresiden? F, G NOTE! (Her er ikke F med i det hele tatt, og må derfor alltid være med i kandiadtnøkler)
+Hvilke attributter finnes kun på høyresiden? E, D
+Må forsøke å utvide med: A, B, C
+
+Forsøker først med kun G: FG⁺ = {F, G, B, C, A, E, D} som er en kandidatnøkkel
+Altså er FG eneste kandidanøkkel. Siden enhver annen kandidatnøkkel vil være en utvidelse av FG, og dermed vil de ikke være minimale, så derfor er FG eneste kandidatnøkkel.
+
+
+
+Oppgave 11
+
+Gitt følgende relasjon:
+R(A, B, C, D)
+
+Og følgende FDer
+A -> B
+B -> C
+
+Hva er normalformen til R? Forklar hvordan du kommer frem til svaret.
+
+Først er vi nødt til å finne kandidatnøkklene til relasjonen.
+Aldri på høyresiden: A, D
+Bare på høyresiden: C
+Utvide med: B
+Starter først med å sjekke tillukningen til AD : AD⁺ = {A, D, B, C} dette er en kandidanøkkel.
+Enhver annen kandidatnøkkel vil være en utvidelse av AD, og dermed vil de ikke være minimale, så derfor er AD eneste kandidatnøkkel
+
+Kandidatnøkler: AD
+
+Så er vi nødt til å finne normalformen til den første FDen.
+A er ikke en supernøkkel, men kun en del av kandidatnøkkelen, så brudd på BCNF.
+B er ikke et nøkkelattributt, derfor er det brudd på 3NF.
+A er en del av en kandidatnøkkel, og det er derfor også brudd på 2NF,
+som betyr at den første FDen er på 1NF,
+og dermed er normalformen til R: 1NF
+
+
+Oppgave 12
+
+Gitt relasjonen:
+T(A, B, C, D)
+
+og følgende FDer
+A -> B
+B -> C
+C -> D
+
+Dekomponer relasjonen T tapsfritt til BCNF ved å bruke algoritmen for tapsfi dekomposisjon
+
+Først er vi nødt til å finne kandidatnøkklene:
+Aldri på høyreside: A
+Bare på høyreside: D
+Utvide med: B, C
+A⁺ = {A, B, C, D} dette er dermed kandidatnøkkelen vår
+
+kandidatnøkkel:
+A
+
+Sjekke hvilke FDer som bryter med BCNF, starter med nummer 1
+A -> B bryter ikke med BCNF, gå til neste
+
+B -> C bryter med BCNF, må dermed dekomponere T til:
+S1(B, C, D) kan tilknyttes FDene: 2 og 3, Her vil kandidatnøkkelen være B
+S2(B, A) Kan tilknyttes FDene: 1, Her vil kandiatnøkkelen være A
+
+S1 vil da ikke bryte med BCNF på FD 2, men den vil det for FD 3
+og vi må dermed dekomponere S1, men nå kun med de attributtene i S1
+S11(C, D) Kan tilknyttes FD 3, Og har kandidatnøkkelen C og er på BCNF så går fint
+S12(C, B) Kan tilknyttes FD 2, og har kandidatnøkkelen B og er på BCNF så går fint
+
+S2 vil heller ikke bryte med BCNF, og vi er ferdig
+
+Vi ser da at T kan dekomponere tapsfritt til:
+S11(C, D)
+S12(C, B)
+S2(B, A)
