@@ -1,0 +1,53 @@
+DISTINCT - gir unikt, f.eks: SELECT DISTINCT parttype, gir alle unike rolletyper
+
+WHERE p.firstname != '' --Fjerner også NULLs, oppgave 5 fra uke9, DENNE FUNGERER PÅ STRING/TEXT!
+WHERE s.firstprodyear IS NOT NULL -- DENNE FUNGERER PÅ INTEGER
+
+Hvilke filmer (tittel og score) med over 100 000 stemmer har en høyere score enn snittet blant filmer med over 100 000 stemmer (subspørring!) (20)
+SELECT f.title, fr.rank
+FROM film AS f
+    JOIN filmrating AS fr USING (filmid)
+WHERE fr.votes > 100000 AND fr.rank >= ( -- vikitg å notere seg ned fr.rank >= 
+    SELECT avg(fr.rank)
+    FROM filmrating AS fr
+    WHERE votes > 100000
+);
+
+Se oppgave 12 uke 9
+
+HAVING count(DISTINCT personid) > 300 --i denne oppgaven skulle finne hvor 300 personer har deltatt i en film, uansett hvilken rolle de har
+MEN! husk at hver person kan ha flere roller i en film, og hvis man da ikke har med DISTINCT så vil den personen telle som en person for hver rolle
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+SELECT firstname || ' ' || lastname AS regissor, count(filmid) AS antall, MIN(prodyear) AS forste_film, MAX(prodyear) AS siste_film
+FROM person AS p
+    JOIN filmparticipation AS fp USING (personid)
+    JOIN film AS f USING (filmid)
+    JOIN filmitem AS fi USING (filmid)
+WHERE parttype = 'director'
+    AND filmtype = 'C'
+GROUP BY personid, firstname, lastname
+HAVING (MAX(prodyear) - MIN(prodyear) > 49)
+ORDER BY (MAX(prodyear) - MIN(prodyear)) DESC;
+Denne oppgaven ser veldig standard ut, MEN! her er vi  nødt til å ta GROUP BY på personid i tillegg siden to regissører kan ha samme navn.
+
+Oppgave 22 uke9
+Oppgave 24 uke9
+
+WHERE prodyear IN (2008,2009,2010)
+
+
+ELLER betyr som regel UNION/UNION ALL
+
+CREATE VIEW, se oppgave 5 2020eksamen
+
+
+UPDATE	ALTER
+DELETE	DROP
+INSERT	CREATE
+
+'TV%', for de som starter med TV
+'%TV', for de som slutter med TV
+'%TV%', for de som inneholder TV
+'%TV%inch', for de som inneholder TV og slutter med inch
+'%r%i%', for de som inneholder r og i
