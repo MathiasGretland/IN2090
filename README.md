@@ -1,19 +1,19 @@
 # IN2090
 
-Obligatoriske oppgaver i IN2090 – Databaser og datamodellering - Høst 2021
+Obligatoriske oppgaver i IN2090 – Introduksjon til operativsystemer og datakommunikasjon - Vår 2022
 
-Dette er en oversikt over obligatoriske oppgaver levert av meg i emnet IN2090, Høst 2021 på UiO. 
+Dette er en oversikt over obligatoriske oppgaver og hjemmeeksamen i C levert av meg i emnet IN2140, Vår 2022 på UiO. 
 
 Kort om emnet:
 
-Dette emnet gir en grundig innføring i en metode for semantisk datamodellering og hvordan en slik modell kan realiseres som en fysisk database. Emnet gir inngående trening i bruk av SQL til å formulere spørringer mot relasjonsdatabaser. Det gis en enkel introduksjon til teorien for relasjonsdatabaser.
+Emnet gir en innføring i operativsystemer, sett både fra brukerens og programmererens synspunkt, og fra maskinens side. Det vil også gi innsikt i hvordan dagens datakommunikasjon foregår og hvordan man lager programmer som benytter slik kommunikasjon. Programmeringsspråket C benyttes, og en grunnleggende introduksjon vil bli gitt.
 
 Hva lærer du?
 
-Etter å ha fullført IN2090:
+Etter å ha tatt emnet
 
-* Kan du lage og kvalitetssikre en hensiktsmessig datamodell for et gitt anvendelsesområde
-* Kan du realisere denne modellen som en relasjonsdatabase
-* Har du grundig trening i bruk av SQL som spørrespråk mot relasjonsdatabaser
-* Vet du litt om hvordan man finner ut om en relasjonsdatabase har oppdateringsanomalier
-* Har du kjennskap til hvordan man kan bruke vanlige programmeringsspråk til å foreta spørringer mot relasjonsdatabaser
+har du grunnleggende kunnskap om de viktigste komponentene i et operativsystem og hvordan det virker
+kan du utvikle små programmer som kaller på tjenester i operativsystemet
+kan du velge mellom algoritmer som muliggjør dagens datakommunikasjon og deres bruk
+kan du utvikle programmer med prosesser som kan kommunisere internt i maskinen og over et nettverk
+kan du bruke programmeringsspråket C
